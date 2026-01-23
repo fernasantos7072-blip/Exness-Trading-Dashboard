@@ -32,7 +32,7 @@ import {
 } from 'lucide-react'
 
 function App() {
-  console.log('PRISMA IA Trading System initialized')
+  console.log('PRISMA IA Trading System - v2.0')
   
   const [activeTab, setActiveTab] = useState('dashboard')
   
