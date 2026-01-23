@@ -184,8 +184,8 @@ export const WeeklyForecast = () => {
   
   if (!current) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-white">Carregando análise...</div>
+      <div className="flex items-center justify-center py-20">
+        <div className="text-white text-lg">Carregando análise de {selectedPair}...</div>
       </div>
     )
   }

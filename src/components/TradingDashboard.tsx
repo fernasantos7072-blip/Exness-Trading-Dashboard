@@ -409,7 +409,7 @@ export const TradingDashboard = () => {
       </div>
       
       {/* Sinais Recentes */}
-      <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6 min-h-[400px]">
+      <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-semibold text-white flex items-center">
             <Zap className="w-6 h-6 mr-2 text-purple-400" />
@@ -505,7 +505,7 @@ export const TradingDashboard = () => {
             <p className="text-gray-500 text-sm mt-2">O sistema escaneia todos os pares a cada 15 segundos</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 max-h-[800px] overflow-y-auto pr-2">
+          <div className="grid grid-cols-1 gap-4">
             {allSignals.sort((a, b) => b.confidence - a.confidence).map((signal, index) => (
               <div 
                 key={index} 

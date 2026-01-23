@@ -260,7 +260,7 @@ export const TelegramIntegration = () => {
             <p className="text-sm text-gray-500 mt-2">Clique em "Enviar Teste" para começar</p>
           </div>
         ) : (
-          <div className="space-y-4 max-h-96 overflow-y-auto">
+          <div className="space-y-4 max-h-96 overflow-y-auto bg-black/20 p-4 rounded-lg">
             {signalHistory.map((message) => (
               <div key={message.id} className="border border-purple-500/20 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">

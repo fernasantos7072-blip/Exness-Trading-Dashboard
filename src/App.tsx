@@ -105,7 +105,7 @@ function App() {
   }
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black">
+    <div className="min-h-screen" style={{ background: 'transparent' }}>
       <Header />
       
       {/* Navigation Tabs */}

@@ -52,22 +52,32 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    background: #000000;
+  }
+
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply text-foreground font-sans;
     background: linear-gradient(135deg, #111827 0%, #581c87 50%, #000000 100%);
+    background-attachment: fixed;
+    background-size: cover;
     min-height: 100vh;
     overflow-x: hidden;
+    overflow-y: auto;
   }
   
-  /* Fix para evitar tela cinza no scroll */
-  html, body {
-    scroll-behavior: smooth;
-    background-attachment: fixed;
+  /* Fix COMPLETO para evitar tela roxa/cinza no scroll */
+  #root {
+    min-height: 100vh;
+    background: transparent;
   }
   
   main {
     min-height: calc(100vh - 200px);
     background: transparent;
+    position: relative;
+    z-index: 1;
   }
 
   h1, h2, h3, h4, h5, h6 {
