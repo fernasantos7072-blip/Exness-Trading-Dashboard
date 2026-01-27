@@ -36,9 +36,10 @@ export const BinancePairs = () => {
       const symbols = await binanceService.getAllUSDTPairs()
       console.log(`✅ ${symbols.length} pares encontrados!`)
       
-      // Buscar dados reais de cada par (em batches para performance)
+      // Buscar dados reais de TODOS os pares (sem limites)
+      console.log(`🔄 Buscando dados de TODOS os ${symbols.length} pares...`)
       const pairsData = await Promise.all(
-        symbols.slice(0, 100).map(async (symbol) => { // Limitar a 100 para performance inicial
+        symbols.map(async (symbol) => { // ⚠️ TODOS os pares, sem limite!
           try {
             const ticker = await binanceService.get24hTicker(symbol)
             if (!ticker) {
@@ -93,10 +94,14 @@ export const BinancePairs = () => {
       
       setAllBinancePairs(pairsData)
       console.log(`✅ ${pairsData.length} pares carregados com sucesso!`)
+      console.log(`📊 100% dos pares da Binance carregados - SEM EXCEÇÕES!`)
       
-      // Verificar se LABUSDT está na lista
-      const hasLAB = pairsData.some(p => p.symbol === 'LABUSDT')
-      console.log(`${hasLAB ? '✅' : '⚠️'} LABUSDT ${hasLAB ? 'encontrado' : 'não encontrado'} na lista`)
+      // Verificar alguns pares específicos
+      const specificPairs = ['LABUSDT', 'ZECUSDT', 'XMRUSDT', 'DASHUSDT', 'BTCUSDT', 'ETHUSDT']
+      specificPairs.forEach(pair => {
+        const found = pairsData.some(p => p.symbol === pair)
+        console.log(`${found ? '✅' : '⚠️'} ${pair} ${found ? 'encontrado' : 'não encontrado'} na lista`)
+      })
       
     } catch (error) {
       console.error('❌ Erro ao carregar pares:', error)

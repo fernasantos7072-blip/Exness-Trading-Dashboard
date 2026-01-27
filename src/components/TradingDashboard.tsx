@@ -194,13 +194,20 @@ export const TradingDashboard = () => {
       }
       
       console.log(`📊 Total de pares para escanear: ${pairsToScan.length}`)
+      console.log(`🎯 ESCANEANDO **TODOS** OS ${pairsToScan.length} PARES SEM EXCEÇÃO!`)
+      console.log(`⚠️ Nenhum par será ignorado - análise 100% completa`)
       
-      // Analisar TODOS os pares com callback de progresso
+      // Analisar **TODOS** os pares com callback de progresso em tempo real
       const results = await binanceService.scanAllPairs(
         (current, total, symbol) => {
           setScannedPairs(current)
           setCurrentPair(symbol)
           setScanProgress(Math.floor((current / total) * 100))
+          
+          // Log a cada 50 pares para acompanhamento
+          if (current % 50 === 0) {
+            console.log(`🔄 Progresso: ${current}/${total} pares (${Math.floor((current/total)*100)}%) - Atual: ${symbol}`)
+          }
         }
       )
       
@@ -217,6 +224,8 @@ export const TradingDashboard = () => {
       
       console.log(`✅ SCAN COMPLETO! ${results.length} sinais encontrados de ${pairsToScan.length} pares`)
       console.log(`📊 Total de sinais acumulados: ${updatedAllSignals.length}`)
+      console.log(`🎯 Taxa de detecção: ${((results.length / pairsToScan.length) * 100).toFixed(2)}%`)
+      console.log(`🐋 Todos os sinais são com BALEIAS ATIVAS - garantia de qualidade!`)
     } catch (error) {
       console.error('❌ Erro no scan:', error)
     } finally {

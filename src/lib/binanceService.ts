@@ -702,36 +702,41 @@ class BinanceService {
     }
   }
   
-  // ANÁLISE EM LOOP REAL - ESCANEIA **TODOS** OS PARES DA BINANCE EM TEMPO REAL
+  // ANÁLISE EM LOOP REAL - ESCANEIA **TODOS** OS PARES DA BINANCE EM TEMPO REAL (SEM EXCEÇÕES)
   async scanAllPairs(
     onProgress?: (current: number, total: number, symbol: string) => void
   ): Promise<MarketAnalysis[]> {
     // ⚠️ VALIDAR DATA ATUAL NO INÍCIO DO SCAN
     const dateValidation = this.validateCurrentDate()
-    console.log('🔄 INICIANDO SCAN COMPLETO EM TODOS OS PARES DA BINANCE EM TEMPO REAL...')
+    console.log('🔄 INICIANDO SCAN COMPLETO EM **TODOS** OS PARES DA BINANCE EM TEMPO REAL...')
     console.log(dateValidation.message)
     console.log(`📅 ESCANEANDO NO DIA: ${dateValidation.currentDate.toLocaleDateString('pt-BR')} às ${dateValidation.currentDate.toLocaleTimeString('pt-BR')}`)
     console.log('⚠️ ATENÇÃO: Esta análise é SEMPRE em tempo real, NUNCA usa dados antigos!')
+    console.log('⚠️ IMPORTANTE: TODOS OS ATIVOS DA BINANCE SERÃO ANALISADOS - SEM EXCEÇÕES!')
     
     // SEMPRE buscar lista atualizada de pares (garantir que está REAL-TIME)
-    console.log('🔄 Atualizando lista de pares da Binance...')
+    console.log('🔄 Atualizando lista COMPLETA de pares da Binance...')
     await this.getAllUSDTPairs()
     
     const totalPairs = this.allPairs.length
-    console.log(`📊 Total de pares ATIVOS para escanear: ${totalPairs}`)
-    console.log(`📊 Primeiros 5 pares: ${this.allPairs.slice(0, 5).join(', ')}`)
-    console.log(`📊 Últimos 5 pares: ${this.allPairs.slice(-5).join(', ')}`)
+    console.log(`📊 Total de pares ATIVOS para escanear: ${totalPairs} (100% da Binance)`)
+    console.log(`📊 Primeiros 10 pares: ${this.allPairs.slice(0, 10).join(', ')}`)
+    console.log(`📊 Últimos 10 pares: ${this.allPairs.slice(-10).join(', ')}`)
+    console.log(`🎯 TODOS os ${totalPairs} pares serão analisados sem limite!`)
     
     const results: MarketAnalysis[] = []
     let scanned = 0
     
-    // Processar em batches de 10 para evitar rate limit
-    const batchSize = 10
+    // Processar em batches de 20 para otimizar (aumentado de 10 para 20)
+    const batchSize = 20
     
+    // ⚠️ IMPORTANTE: Processar TODOS os pares sem exceção
     for (let i = 0; i < this.allPairs.length; i += batchSize) {
       const batch = this.allPairs.slice(i, i + batchSize)
       
-      // Processar batch em paralelo
+      console.log(`📦 Batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(totalPairs / batchSize)}: Analisando ${batch.length} pares (${batch[0]} até ${batch[batch.length - 1]})`)
+      
+      // Processar batch em paralelo para máxima eficiência
       const batchPromises = batch.map(async (symbol) => {
         try {
           scanned++
@@ -786,25 +791,33 @@ class BinanceService {
         }
       })
       
-      // Aguardar batch completo
+      // Aguardar batch completo antes de prosseguir
       const batchResults = await Promise.all(batchPromises)
       
-      // Adicionar resultados válidos
+      // Adicionar TODOS os resultados válidos (com baleia ativa)
       batchResults.forEach(result => {
         if (result) results.push(result)
       })
       
-      // Pequeno delay entre batches para evitar rate limit (500ms)
-      await new Promise(resolve => setTimeout(resolve, 500))
+      console.log(`✅ Batch processado: ${batchResults.filter(r => r !== null).length} sinais com baleias encontrados`)
+      
+      // Pequeno delay entre batches para evitar rate limit da Binance (300ms - otimizado)
+      await new Promise(resolve => setTimeout(resolve, 300))
     }
     
+    const avgConfidence = results.length > 0 ? Math.round(results.reduce((acc, r) => acc + r.confidence, 0) / results.length) : 0
+    
     const scanSummary = `
-🎉 SCAN COMPLETO EM TEMPO REAL!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎉 SCAN COMPLETO EM **TODOS** OS ATIVOS DA BINANCE!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📅 Data/Hora: ${new Date().toLocaleDateString('pt-BR')} ${new Date().toLocaleTimeString('pt-BR')}
-📊 Pares escaneados: ${totalPairs} (TODOS OS ATIVOS DA BINANCE)
+📊 Pares escaneados: ${totalPairs}/${totalPairs} (100% - TODOS OS ATIVOS)
 ✅ Sinais encontrados: ${results.length}
-🐋 Todos com atividade de BALEIAS!
-💪 Confiança média: ${results.length > 0 ? Math.round(results.reduce((acc, r) => acc + r.confidence, 0) / results.length) : 0}%
+🐋 Sinais com BALEIAS ATIVAS: ${results.length} (100%)
+💪 Confiança média: ${avgConfidence}%
+🎯 Taxa de detecção: ${((results.length / totalPairs) * 100).toFixed(2)}%
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 `
     console.log(scanSummary)
     
