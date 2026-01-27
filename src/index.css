@@ -61,21 +61,39 @@
     @apply text-foreground font-sans;
     background: linear-gradient(135deg, #111827 0%, #581c87 50%, #000000 100%);
     background-attachment: fixed;
-    background-size: cover;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     min-height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
+    position: relative;
+  }
+  
+  /* APLICAR o MESMO gradiente em múltiplas camadas para garantir que NUNCA apareça só roxo */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #111827 0%, #581c87 50%, #000000 100%);
+    z-index: -1;
+    pointer-events: none;
   }
   
   /* Fix COMPLETO para evitar tela roxa/cinza no scroll */
   #root {
     min-height: 100vh;
-    background: transparent;
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(88, 28, 135, 0.95) 50%, rgba(0, 0, 0, 0.95) 100%);
+    background-attachment: fixed;
+    position: relative;
   }
   
   main {
-    min-height: calc(100vh - 200px);
-    background: transparent;
+    min-height: calc(100vh - 100px);
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
     position: relative;
     z-index: 1;
   }

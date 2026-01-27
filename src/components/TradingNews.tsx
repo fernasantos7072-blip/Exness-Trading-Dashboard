@@ -193,7 +193,7 @@ export const TradingNews = () => {
   }
   
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-gradient-to-b from-gray-900/50 to-black/50 p-6 rounded-xl">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <Newspaper className="w-6 h-6 text-purple-400" />

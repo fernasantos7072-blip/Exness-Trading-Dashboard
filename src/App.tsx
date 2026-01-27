@@ -105,7 +105,7 @@ function App() {
   }
   
   return (
-    <div className="min-h-screen" style={{ background: 'transparent' }}>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900/95 via-purple-900/90 to-black/95">
       <Header />
       
       {/* Navigation Tabs */}
@@ -131,8 +131,8 @@ function App() {
         </div>
       </div>
       
-      <main className="container mx-auto px-4 py-8">
-        <div className="animate-fade-in">
+      <main className="container mx-auto px-4 py-8 bg-black/20 backdrop-blur-sm min-h-screen">
+        <div className="animate-fade-in bg-gradient-to-b from-transparent to-black/30 rounded-xl p-6">
           {renderContent()}
         </div>
       </main>
