@@ -321,7 +321,7 @@ export const TradingDashboard = () => {
       
       {/* Barra de Progresso REAL */}
       {isScanning && (
-        <div className="bg-black/40 border border-purple-500/30 rounded-lg p-6">
+        <div className="bg-gradient-to-r from-purple-900/40 to-purple-800/40 backdrop-blur-sm border border-purple-500/30 rounded-lg p-6">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
@@ -418,7 +418,7 @@ export const TradingDashboard = () => {
       </div>
       
       {/* Sinais Recentes */}
-      <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-semibold text-white flex items-center">
             <Zap className="w-6 h-6 mr-2 text-purple-400" />
@@ -434,10 +434,10 @@ export const TradingDashboard = () => {
           <div className="mb-6 border-2 border-blue-500 rounded-xl p-6 bg-blue-500/10">
             <div className="text-blue-400 font-bold text-lg mb-4">🎯 Resultado da Busca Específica</div>
             <div 
-              className={`border rounded-xl p-5 transition-all ${
+              className={`border rounded-xl p-5 transition-all backdrop-blur-sm ${
                 searchResult.signal === 'COMPRA' 
-                  ? 'bg-green-500/10 border-green-500/30' 
-                  : 'bg-red-500/10 border-red-500/30'
+                  ? 'bg-gradient-to-br from-green-900/40 to-green-800/20 border-green-500/30' 
+                  : 'bg-gradient-to-br from-red-900/40 to-red-800/20 border-red-500/30'
               }`}
             >
               {/* Mesmo layout do sinal normal */}
@@ -508,20 +508,20 @@ export const TradingDashboard = () => {
         )}
         
         {allSignals.length === 0 ? (
-          <div className="text-center py-12 min-h-[300px] flex flex-col items-center justify-center">
+          <div className="text-center py-12 min-h-[300px] flex flex-col items-center justify-center bg-gradient-to-b from-gray-900/50 to-black/50 rounded-lg">
             <Activity className="w-16 h-16 text-gray-400 mx-auto mb-4 animate-pulse" />
             <p className="text-gray-400 text-lg">Iniciando scan automático...</p>
             <p className="text-gray-500 text-sm mt-2">O sistema escaneia todos os pares a cada 15 segundos</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 gap-4 bg-transparent">
             {allSignals.sort((a, b) => b.confidence - a.confidence).map((signal, index) => (
               <div 
                 key={index} 
-                className={`border rounded-xl p-5 transition-all ${
+                className={`border rounded-xl p-5 transition-all backdrop-blur-sm ${
                   signal.signal === 'COMPRA' 
-                    ? 'bg-green-500/10 border-green-500/30' 
-                    : 'bg-red-500/10 border-red-500/30'
+                    ? 'bg-gradient-to-br from-green-900/60 to-green-800/30 border-green-500/30' 
+                    : 'bg-gradient-to-br from-red-900/60 to-red-800/30 border-red-500/30'
                 }`}
               >
                 <div className="flex items-start justify-between mb-4">
@@ -562,23 +562,23 @@ export const TradingDashboard = () => {
                 
                 {/* Indicadores */}
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
-                  <div className="text-center p-2 bg-black/20 rounded-lg">
+                  <div className="text-center p-2 bg-black/40 backdrop-blur-sm rounded-lg">
                     <div className="text-xs text-gray-400">Confiança</div>
                     <div className="text-lg font-bold text-purple-400">{signal.confidence}%</div>
                   </div>
-                  <div className="text-center p-2 bg-black/20 rounded-lg">
+                  <div className="text-center p-2 bg-black/40 backdrop-blur-sm rounded-lg">
                     <div className="text-xs text-gray-400">RSI</div>
                     <div className="text-lg font-bold text-white">{signal.indicators.rsi.toFixed(1)}</div>
                   </div>
-                  <div className="text-center p-2 bg-black/20 rounded-lg">
+                  <div className="text-center p-2 bg-black/40 backdrop-blur-sm rounded-lg">
                     <div className="text-xs text-gray-400">ADX</div>
                     <div className="text-lg font-bold text-white">{signal.indicators.adx.toFixed(1)}</div>
                   </div>
-                  <div className="text-center p-2 bg-black/20 rounded-lg">
+                  <div className="text-center p-2 bg-black/40 backdrop-blur-sm rounded-lg">
                     <div className="text-xs text-gray-400">Volatilidade</div>
                     <div className="text-lg font-bold text-yellow-400">{signal.volatility}</div>
                   </div>
-                  <div className="text-center p-2 bg-black/20 rounded-lg">
+                  <div className="text-center p-2 bg-black/40 backdrop-blur-sm rounded-lg">
                     <div className="text-xs text-gray-400">Probabilidade</div>
                     <div className="text-lg font-bold text-green-400">{signal.probability}%</div>
                   </div>

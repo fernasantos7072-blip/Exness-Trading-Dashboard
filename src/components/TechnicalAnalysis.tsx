@@ -128,7 +128,7 @@ export const TechnicalAnalysis = () => {
       </div>
       
       {/* Resumo Geral */}
-      <div className="bg-gradient-to-r from-purple-500/20 to-purple-600/20 border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-purple-900/60 to-purple-800/40 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="text-center">
             <div className="text-3xl font-bold text-white mb-2">${currentAnalysis.price}</div>
@@ -160,7 +160,7 @@ export const TechnicalAnalysis = () => {
       {/* Indicadores */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {indicators.map((indicator, index) => (
-          <div key={index} className="bg-black/40 border border-purple-500/30 rounded-xl p-4">
+          <div key={index} className="bg-gradient-to-br from-gray-900/80 to-gray-800/60 backdrop-blur-sm border border-purple-500/30 rounded-xl p-4">
             <div className="flex items-center justify-between mb-3">
               <h4 className="font-semibold text-white">{indicator.name}</h4>
               <div className={`w-3 h-3 rounded-full ${
@@ -175,14 +175,14 @@ export const TechnicalAnalysis = () => {
       </div>
       
       {/* Padrões Identificados */}
-      <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
         <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
           <BarChart3 className="w-6 h-6 mr-2 text-purple-400" />
           Padrões Gráficos Identificados
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {currentAnalysis.patterns.map((pattern, index) => (
-            <div key={index} className="flex items-center space-x-3 p-3 bg-purple-500/10 rounded-lg">
+            <div key={index} className="flex items-center space-x-3 p-3 bg-gradient-to-r from-purple-900/40 to-purple-800/20 backdrop-blur-sm rounded-lg">
               <Target className="w-4 h-4 text-purple-400" />
               <span className="text-white font-medium">{pattern}</span>
             </div>
@@ -191,11 +191,11 @@ export const TechnicalAnalysis = () => {
       </div>
       
       {/* Níveis Fibonacci */}
-      <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
         <h3 className="text-xl font-semibold text-white mb-4">Níveis de Fibonacci</h3>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {Object.entries(currentAnalysis.fibonacciLevels).map(([level, price]) => (
-            <div key={level} className="text-center p-3 bg-purple-500/10 rounded-lg">
+            <div key={level} className="text-center p-3 bg-gradient-to-br from-purple-900/40 to-purple-800/20 backdrop-blur-sm rounded-lg">
               <div className="text-purple-400 font-medium text-sm">{level}</div>
               <div className="text-white font-bold">${price}</div>
             </div>
@@ -205,7 +205,7 @@ export const TechnicalAnalysis = () => {
       
       {/* Projeção de Preços */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-black/40 border border-green-500/30 rounded-xl p-6">
+        <div className="bg-gradient-to-br from-green-900/40 to-green-800/20 backdrop-blur-sm border border-green-500/30 rounded-xl p-6">
           <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
             <TrendingUp className="w-6 h-6 mr-2 text-green-400" />
             Alvos de Alta
@@ -226,7 +226,7 @@ export const TechnicalAnalysis = () => {
           </div>
         </div>
         
-        <div className="bg-black/40 border border-red-500/30 rounded-xl p-6">
+        <div className="bg-gradient-to-br from-red-900/40 to-red-800/20 backdrop-blur-sm border border-red-500/30 rounded-xl p-6">
           <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
             <TrendingDown className="w-6 h-6 mr-2 text-red-400" />
             Suportes e Resistências

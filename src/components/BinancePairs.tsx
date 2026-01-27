@@ -199,26 +199,26 @@ export const BinancePairs = () => {
       </div>
       
       {/* Stats Rápidas */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-black/40 border border-green-500/30 rounded-lg p-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 bg-transparent">
+        <div className="bg-gradient-to-br from-green-900/40 to-green-800/20 backdrop-blur-sm border border-green-500/30 rounded-lg p-4">
           <div className="text-green-400 font-semibold mb-1">Sinais COMPRA</div>
           <div className="text-2xl font-bold text-white">
             {binancePairs.filter(p => p.signal === 'COMPRA').length}
           </div>
         </div>
-        <div className="bg-black/40 border border-red-500/30 rounded-lg p-4">
+        <div className="bg-gradient-to-br from-red-900/40 to-red-800/20 backdrop-blur-sm border border-red-500/30 rounded-lg p-4">
           <div className="text-red-400 font-semibold mb-1">Sinais VENDA</div>
           <div className="text-2xl font-bold text-white">
             {binancePairs.filter(p => p.signal === 'VENDA').length}
           </div>
         </div>
-        <div className="bg-black/40 border border-yellow-500/30 rounded-lg p-4">
+        <div className="bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 backdrop-blur-sm border border-yellow-500/30 rounded-lg p-4">
           <div className="text-yellow-400 font-semibold mb-1">Volume ALTA</div>
           <div className="text-2xl font-bold text-white">
             {binancePairs.filter(p => p.volume === 'ALTA').length}
           </div>
         </div>
-        <div className="bg-black/40 border border-purple-500/30 rounded-lg p-4">
+        <div className="bg-gradient-to-br from-purple-900/40 to-purple-800/20 backdrop-blur-sm border border-purple-500/30 rounded-lg p-4">
           <div className="text-purple-400 font-semibold mb-1">Total Pares</div>
           <div className="text-2xl font-bold text-white">{binancePairs.length}</div>
         </div>
@@ -227,7 +227,7 @@ export const BinancePairs = () => {
       {/* Lista de Pares */}
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
         {filteredPairs.map((pair) => (
-          <div key={pair.symbol} className="bg-black/40 border border-purple-500/30 rounded-xl p-4 hover:border-purple-400/50 transition-all duration-300">
+          <div key={pair.symbol} className="bg-gradient-to-br from-gray-900/80 to-gray-800/60 backdrop-blur-sm border border-purple-500/30 rounded-xl p-4 hover:border-purple-400/50 transition-all duration-300">
             <div className="flex items-center justify-between mb-3">
               <div>
                 <h4 className="font-bold text-white text-lg">{pair.symbol}</h4>
@@ -291,13 +291,13 @@ export const BinancePairs = () => {
       </div>
       
       {isLoading ? (
-        <div className="text-center py-12">
+        <div className="text-center py-12 min-h-[400px] bg-gradient-to-b from-gray-900/50 to-black/50 rounded-lg flex flex-col items-center justify-center">
           <RefreshCw className="w-12 h-12 text-purple-400 mx-auto mb-4 animate-spin" />
           <p className="text-white text-lg font-medium">Carregando TODOS os pares da Binance...</p>
           <p className="text-gray-400 text-sm mt-2">Buscando dados em tempo real via API</p>
         </div>
       ) : filteredPairs.length === 0 ? (
-        <div className="text-center py-12">
+        <div className="text-center py-12 min-h-[400px] bg-gradient-to-b from-gray-900/50 to-black/50 rounded-lg flex flex-col items-center justify-center">
           <Activity className="w-12 h-12 text-gray-400 mx-auto mb-4" />
           <p className="text-gray-400">Nenhum par encontrado com os filtros selecionados.</p>
           <p className="text-gray-500 text-sm mt-2">Total de {binancePairs.length} pares disponíveis</p>

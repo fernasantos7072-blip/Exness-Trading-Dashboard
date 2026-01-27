@@ -145,7 +145,7 @@ export const EconomicCalendar = () => {
       
       <div className="space-y-4">
         {todayEvents.map((event) => (
-          <div key={event.id} className="trading-card">
+          <div key={event.id} className="bg-gradient-to-br from-gray-900/80 to-gray-800/60 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6 hover:border-purple-400/50 transition-all duration-300">
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center space-x-3">
                 <div className="flex items-center space-x-2">
@@ -189,7 +189,7 @@ export const EconomicCalendar = () => {
               </div>
             </div>
             
-            <div className="bg-trading-darker/50 rounded-lg p-3">
+            <div className="bg-gradient-to-r from-purple-900/40 to-purple-800/20 backdrop-blur-sm rounded-lg p-3">
               <div className="flex items-start space-x-2">
                 <TrendingUp className="w-4 h-4 text-primary mt-0.5" />
                 <div>

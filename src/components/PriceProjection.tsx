@@ -100,7 +100,7 @@ export const PriceProjection = () => {
       </div>
       
       {/* Setup Completo */}
-      <div className="bg-gradient-to-r from-purple-500/20 to-purple-600/20 border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-purple-900/60 to-purple-800/40 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
         <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
           <Target className="w-6 h-6 mr-2 text-purple-400" />
           Setup Completo - {selectedPair}
@@ -130,7 +130,7 @@ export const PriceProjection = () => {
       </div>
       
       {/* Níveis Fibonacci */}
-      <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
         <h3 className="text-xl font-semibold text-white mb-4">Projeção Fibonacci</h3>
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           <div className="text-center p-4 bg-blue-500/20 rounded-lg border border-blue-500/30">
@@ -160,7 +160,7 @@ export const PriceProjection = () => {
         </div>
         
         {/* Risk/Reward */}
-        <div className="mt-6 p-4 bg-purple-500/10 rounded-lg">
+        <div className="mt-6 p-4 bg-gradient-to-r from-purple-900/40 to-purple-800/20 backdrop-blur-sm rounded-lg">
           <h4 className="text-white font-semibold mb-3">Análise Risk/Reward</h4>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center">
@@ -181,7 +181,7 @@ export const PriceProjection = () => {
       
       {/* ATR e Volatilidade */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
+        <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/60 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
           <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
             <Activity className="w-6 h-6 mr-2 text-purple-400" />
             ATR + Volatilidade
@@ -206,7 +206,7 @@ export const PriceProjection = () => {
           </div>
         </div>
         
-        <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
+        <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/60 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
           <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
             <BarChart3 className="w-6 h-6 mr-2 text-purple-400" />
             Volume Profile
@@ -231,7 +231,7 @@ export const PriceProjection = () => {
       </div>
       
       {/* Price Action */}
-      <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
         <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
           <TrendingUp className="w-6 h-6 mr-2 text-purple-400" />
           Análise Price Action
@@ -253,7 +253,7 @@ export const PriceProjection = () => {
       </div>
       
       {/* Momentum */}
-      <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
         <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
           <Zap className="w-6 h-6 mr-2 text-purple-400" />
           Análise de Momentum

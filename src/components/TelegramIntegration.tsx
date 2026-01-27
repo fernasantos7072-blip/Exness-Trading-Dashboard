@@ -125,7 +125,7 @@ export const TelegramIntegration = () => {
       )}
       
       {/* Configuração */}
-      <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
         <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
           <Settings className="w-5 h-5 mr-2 text-purple-400" />
           Configuração do Bot
@@ -180,7 +180,7 @@ export const TelegramIntegration = () => {
       </div>
       
       {/* Teste de Mensagem */}
-      <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
         <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
           <MessageCircle className="w-5 h-5 mr-2 text-purple-400" />
           Teste de Mensagem
@@ -217,7 +217,7 @@ export const TelegramIntegration = () => {
       </div>
       
       {/* Formato dos Sinais */}
-      <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
         <h3 className="text-xl font-semibold text-white mb-4">
           Formato dos Sinais Automáticos
         </h3>
@@ -250,11 +250,11 @@ export const TelegramIntegration = () => {
       </div>
       
       {/* Histórico de Mensagens */}
-      <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
         <h3 className="text-xl font-semibold text-white mb-4">Histórico de Mensagens</h3>
         
         {signalHistory.length === 0 ? (
-          <div className="text-center py-8">
+          <div className="text-center py-8 bg-gradient-to-b from-gray-900/30 to-black/30 rounded-lg">
             <MessageCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
             <p className="text-gray-400">Nenhuma mensagem enviada ainda</p>
             <p className="text-sm text-gray-500 mt-2">Clique em "Enviar Teste" para começar</p>

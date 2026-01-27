@@ -87,11 +87,11 @@
 
 @layer components {
   .trading-card {
-    @apply bg-black/40 border border-purple-500/30 rounded-xl p-6 hover:border-purple-400/50 transition-all duration-300 backdrop-blur-sm;
+    @apply bg-gradient-to-br from-gray-900/80 to-gray-800/60 border border-purple-500/30 rounded-xl p-6 hover:border-purple-400/50 transition-all duration-300 backdrop-blur-sm;
   }
 
   .metric-card {
-    @apply bg-black/40 border border-purple-500/30 rounded-lg p-4 backdrop-blur-sm hover:border-purple-400/50 transition-all duration-300;
+    @apply bg-gradient-to-br from-gray-900/70 to-gray-800/50 border border-purple-500/30 rounded-lg p-4 backdrop-blur-sm hover:border-purple-400/50 transition-all duration-300;
   }
 
   .prisma-gradient {
