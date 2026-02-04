@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Header } from './components/Header'
 import { TradingDashboard } from './components/TradingDashboard'
 import { TechnicalAnalysis } from './components/TechnicalAnalysis'
-import { PriceProjection } from './components/PriceProjection'
 import { BinancePairs } from './components/BinancePairs'
 import { EconomicCalendar } from './components/EconomicCalendar'
 import { TradingNews } from './components/TradingNews'
@@ -10,7 +9,6 @@ import { TelegramIntegration } from './components/TelegramIntegration'
 import { SignalHistory } from './components/SignalHistory'
 import { TradingStrategy } from './components/TradingStrategy'
 import { APIConnections } from './components/APIConnections'
-import { WeeklyForecast } from './components/WeeklyForecast'
 import { PositionMonitor } from './components/PositionMonitor'
 import { AccountBalance } from './components/AccountBalance'
 import { BinanceRealtimeTicker } from './components/BinanceRealtimeTicker'
@@ -38,9 +36,8 @@ function App() {
   
   const tabs = [
     { id: 'dashboard', label: 'Dashboard', icon: <BarChart3 className="w-4 h-4" /> },
-    { id: 'forecast', label: 'Previsão Semanal', icon: <Calendar className="w-4 h-4" /> },
+    { id: 'realtime', label: 'Todos Ativos Binance', icon: <Activity className="w-4 h-4" /> },
     { id: 'analysis', label: 'Análise Técnica', icon: <TrendingUp className="w-4 h-4" /> },
-    { id: 'projection', label: 'Projeção de Preço', icon: <Target className="w-4 h-4" /> },
     { id: 'pairs', label: 'Pares Binance', icon: <Activity className="w-4 h-4" /> },
     { id: 'strategy', label: 'Estratégia V2.0', icon: <Brain className="w-4 h-4" /> },
     { id: 'calendar', label: 'Calendário', icon: <Calendar className="w-4 h-4" /> },
@@ -49,8 +46,7 @@ function App() {
     { id: 'signals', label: 'Histórico', icon: <History className="w-4 h-4" /> },
     { id: 'api', label: 'Conexões API', icon: <Zap className="w-4 h-4" /> },
     { id: 'positions', label: 'Posições Abertas', icon: <Target className="w-4 h-4" /> },
-    { id: 'monitor', label: 'Monitor Posição', icon: <Target className="w-4 h-4" /> },
-    { id: 'realtime', label: 'Real-Time WebSocket', icon: <Zap className="w-4 h-4" /> }
+    { id: 'monitor', label: 'Monitor Posição', icon: <Target className="w-4 h-4" /> }
   ]
   
   const renderContent = () => {
@@ -63,12 +59,10 @@ function App() {
             <TradingDashboard />
           </div>
         )
-      case 'forecast':
-        return <WeeklyForecast />
+      case 'realtime':
+        return <BinanceRealtimeTicker />
       case 'analysis':
         return <TechnicalAnalysis />
-      case 'projection':
-        return <PriceProjection />
       case 'pairs':
         return <BinancePairs />
       case 'strategy':
@@ -87,16 +81,10 @@ function App() {
         return <ActivePositions />
       case 'monitor':
         return <PositionMonitor />
-      case 'realtime':
-        return (
-          <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-white">WebSocket Real-Time Binance</h2>
-            <BinanceRealtimeTicker symbols={['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'XRPUSDT', 'ADAUSDT', 'SOLUSDT']} />
-          </div>
-        )
       default:
         return (
           <div className="space-y-6">
+            <CurrentDateDisplay />
             <AccountBalance />
             <TradingDashboard />
           </div>

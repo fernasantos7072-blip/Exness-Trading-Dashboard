@@ -1,17 +1,59 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useBinanceTicker } from '../hooks/useBinanceTicker'
-import { TrendingUp, TrendingDown, Activity, Zap } from 'lucide-react'
+import { TrendingUp, TrendingDown, Activity, Zap, RefreshCw, Search } from 'lucide-react'
+import { binanceService } from '../lib/binanceService'
 
 interface Props {
   symbols?: string[]
 }
 
 export const BinanceRealtimeTicker: React.FC<Props> = ({ 
-  symbols = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'XRPUSDT', 'ADAUSDT'] 
+  symbols
 }) => {
-  console.log('🎯 BinanceRealtimeTicker renderizado para:', symbols)
+  const [allPairs, setAllPairs] = useState<string[]>([])
+  const [isLoadingPairs, setIsLoadingPairs] = useState(true)
+  const [searchTerm, setSearchTerm] = useState('')
+  const [displayedPairs, setDisplayedPairs] = useState<string[]>([])
+  const [selectedSymbols, setSelectedSymbols] = useState<string[]>(symbols || [])
   
-  const { data, status, error } = useBinanceTicker(symbols)
+  // Carregar TODOS os pares da Binance
+  useEffect(() => {
+    const loadAllPairs = async () => {
+      setIsLoadingPairs(true)
+      console.log('🔄 Carregando TODOS os pares da Binance para WebSocket...')
+      const pairs = await binanceService.getAllUSDTPairs()
+      setAllPairs(pairs)
+      
+      // Se não tiver símbolos fixos, mostrar os 50 principais por volume
+      if (!symbols || symbols.length === 0) {
+        const topPairs = pairs.slice(0, 50) // Top 50 por padrão
+        setSelectedSymbols(topPairs)
+        setDisplayedPairs(topPairs)
+      } else {
+        setDisplayedPairs(symbols)
+      }
+      
+      setIsLoadingPairs(false)
+      console.log(`✅ ${pairs.length} pares carregados! Mostrando ${selectedSymbols.length} em tempo real`)
+    }
+    loadAllPairs()
+  }, [])
+  
+  // Filtrar pares pela busca
+  useEffect(() => {
+    if (searchTerm.trim() === '') {
+      setDisplayedPairs(selectedSymbols)
+    } else {
+      const filtered = selectedSymbols.filter(symbol => 
+        symbol.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      setDisplayedPairs(filtered)
+    }
+  }, [searchTerm, selectedSymbols])
+  
+  console.log('🎯 BinanceRealtimeTicker renderizado para:', displayedPairs.length, 'pares')
+  
+  const { data, status, error } = useBinanceTicker(displayedPairs)
 
   const getStatusColor = () => {
     switch (status) {
@@ -31,17 +73,49 @@ export const BinanceRealtimeTicker: React.FC<Props> = ({
   }
 
   return (
-    <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xl font-semibold text-white flex items-center">
-          <Zap className="w-6 h-6 mr-2 text-purple-400" />
-          Preços Real-Time Binance
-        </h3>
-        <div className={`flex items-center space-x-2 ${getStatusColor()}`}>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-2xl font-bold text-white flex items-center">
+            <Activity className="w-6 h-6 mr-2 text-purple-400" />
+            Todos os Ativos da Binance em Tempo Real
+          </h2>
+          <p className="text-sm text-gray-400 mt-1">
+            {isLoadingPairs ? 'Carregando...' : `${allPairs.length} pares disponíveis • Mostrando ${displayedPairs.length} ativos`}
+          </p>
+        </div>
+        <div className={`flex items-center space-x-2 px-3 py-2 rounded-lg ${getStatusColor()} bg-black/40`}>
           {getStatusIcon()}
           <span className="text-sm font-medium capitalize">{status}</span>
         </div>
       </div>
+      
+      {/* Busca */}
+      <div className="flex items-center space-x-4">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Buscar ativo... (ex: BTC, ETH, ZEC)"
+            className="w-full pl-10 pr-4 py-2 bg-black/40 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+          />
+        </div>
+        <button
+          onClick={() => {
+            setSearchTerm('')
+            setDisplayedPairs(selectedSymbols)
+          }}
+          className="px-4 py-2 bg-purple-500/20 hover:bg-purple-500/30 rounded-lg transition-all flex items-center space-x-2"
+        >
+          <RefreshCw className="w-4 h-4 text-purple-400" />
+          <span className="text-purple-400">Limpar</span>
+        </button>
+      </div>
+      
+      <div className="bg-black/40 border border-purple-500/30 rounded-xl p-6">
 
       {error && (
         <div className="mb-4 p-3 bg-red-500/20 border border-red-500/30 rounded-lg text-red-400 text-sm">
@@ -124,10 +198,11 @@ export const BinanceRealtimeTicker: React.FC<Props> = ({
         })}
       </div>
 
-      <div className="mt-4 pt-4 border-t border-purple-500/20">
-        <p className="text-xs text-gray-400 text-center">
-          🔌 Conectado via WebSocket à Binance • Atualização em tempo real • Sem necessidade de API Key
-        </p>
+        <div className="mt-4 pt-4 border-t border-purple-500/20">
+          <p className="text-xs text-gray-400 text-center">
+            🔌 Conectado via WebSocket à Binance • Atualização em tempo real • {allPairs.length} pares disponíveis • Sem necessidade de API Key
+          </p>
+        </div>
       </div>
     </div>
   )
