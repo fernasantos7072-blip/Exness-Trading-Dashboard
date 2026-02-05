@@ -25,16 +25,18 @@ export const BinanceRealtimeTicker: React.FC<Props> = ({
       setAllPairs(pairs)
       
       // Se não tiver símbolos fixos, mostrar os 50 principais por volume
+      let pairsToShow: string[]
       if (!symbols || symbols.length === 0) {
-        const topPairs = pairs.slice(0, 50) // Top 50 por padrão
-        setSelectedSymbols(topPairs)
-        setDisplayedPairs(topPairs)
+        pairsToShow = pairs.slice(0, 50) // Top 50 por padrão
+        setSelectedSymbols(pairsToShow)
+        setDisplayedPairs(pairsToShow)
       } else {
+        pairsToShow = symbols
         setDisplayedPairs(symbols)
       }
       
       setIsLoadingPairs(false)
-      console.log(`✅ ${pairs.length} pares carregados! Mostrando ${topPairs.length} em tempo real`)
+      console.log(`✅ ${pairs.length} pares carregados! Mostrando ${pairsToShow.length} em tempo real`)
     }
     loadAllPairs()
   }, [])
@@ -92,7 +94,7 @@ export const BinanceRealtimeTicker: React.FC<Props> = ({
       </div>
       
       {/* Busca */}
-      <div className="flex items-center space-x-4 bg-gradient-to-r from-gray-900/90 to-gray-800/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
+      <div className="flex items-center space-x-4 bg-gradient-to-br from-gray-900/95 via-purple-900/30 to-gray-800/95 backdrop-blur-md border border-purple-500/30 rounded-xl p-6">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <input
@@ -115,7 +117,7 @@ export const BinanceRealtimeTicker: React.FC<Props> = ({
         </button>
       </div>
       
-      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-br from-gray-900/95 via-purple-900/20 to-gray-800/95 backdrop-blur-md border border-purple-500/30 rounded-xl p-6">
 
       {error && (
         <div className="mb-4 p-3 bg-red-500/20 border border-red-500/30 rounded-lg text-red-400 text-sm">
@@ -124,7 +126,7 @@ export const BinanceRealtimeTicker: React.FC<Props> = ({
       )}
 
       {isLoadingPairs ? (
-        <div className="flex items-center justify-center py-20 min-h-[400px]">
+        <div className="flex items-center justify-center py-20 min-h-[400px] bg-gradient-to-b from-gray-900/80 via-purple-900/20 to-black/80 rounded-lg">
           <div className="text-center">
             <RefreshCw className="w-12 h-12 text-purple-400 mx-auto mb-4 animate-spin" />
             <div className="text-white text-lg font-semibold">Carregando todos os pares da Binance...</div>
@@ -132,7 +134,7 @@ export const BinanceRealtimeTicker: React.FC<Props> = ({
           </div>
         </div>
       ) : displayedPairs.length === 0 ? (
-        <div className="text-center py-12">
+        <div className="text-center py-12 bg-gradient-to-b from-gray-900/80 via-purple-900/20 to-black/80 rounded-lg">
           <Activity className="w-16 h-16 text-gray-400 mx-auto mb-4" />
           <p className="text-gray-400 text-lg">Nenhum ativo encontrado</p>
           <p className="text-gray-500 text-sm mt-2">Tente outra busca</p>

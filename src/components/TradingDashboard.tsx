@@ -248,7 +248,7 @@ export const TradingDashboard = () => {
   }
   
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 min-h-screen bg-gradient-to-b from-transparent via-purple-900/10 to-black/20 p-6 rounded-xl">
       {/* Header com Status de Scan */}
       <div className="flex items-center justify-between">
         <div>
@@ -418,7 +418,7 @@ export const TradingDashboard = () => {
       </div>
       
       {/* Sinais Recentes */}
-      <div className="bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
+      <div className="bg-gradient-to-br from-gray-900/95 via-purple-900/20 to-gray-800/95 backdrop-blur-md border border-purple-500/30 rounded-xl p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-semibold text-white flex items-center">
             <Zap className="w-6 h-6 mr-2 text-purple-400" />
@@ -508,13 +508,13 @@ export const TradingDashboard = () => {
         )}
         
         {allSignals.length === 0 ? (
-          <div className="text-center py-12 min-h-[300px] flex flex-col items-center justify-center bg-gradient-to-b from-gray-900/50 to-black/50 rounded-lg">
+          <div className="text-center py-12 min-h-[300px] flex flex-col items-center justify-center bg-gradient-to-br from-gray-900/95 via-purple-900/30 to-black/95 backdrop-blur-md rounded-xl border border-purple-500/20">
             <Activity className="w-16 h-16 text-gray-400 mx-auto mb-4 animate-pulse" />
             <p className="text-gray-400 text-lg">Iniciando scan automático...</p>
             <p className="text-gray-500 text-sm mt-2">O sistema escaneia todos os pares a cada 15 segundos</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 bg-transparent">
+          <div className="grid grid-cols-1 gap-4">
             {allSignals.sort((a, b) => b.confidence - a.confidence).map((signal, index) => (
               <div 
                 key={index} 

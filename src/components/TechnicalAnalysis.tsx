@@ -124,7 +124,7 @@ export const TechnicalAnalysis = () => {
   ]
   
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 min-h-screen bg-gradient-to-b from-transparent via-purple-900/10 to-black/20 p-6 rounded-xl">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -148,7 +148,7 @@ export const TechnicalAnalysis = () => {
       </div>
       
       {isLoadingAnalysis ? (
-        <div className="flex items-center justify-center py-20 min-h-[400px] bg-gradient-to-b from-gray-900/50 to-black/50 rounded-lg">
+        <div className="flex items-center justify-center py-20 min-h-[400px] bg-gradient-to-br from-gray-900/95 via-purple-900/30 to-black/95 backdrop-blur-md rounded-xl border border-purple-500/20">
           <div className="text-center">
             <RefreshCw className="w-12 h-12 text-purple-400 mx-auto mb-4 animate-spin" />
             <div className="text-white text-lg font-semibold">Carregando análise REAL de {selectedPair}...</div>

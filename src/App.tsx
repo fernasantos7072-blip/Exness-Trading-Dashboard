@@ -93,7 +93,7 @@ function App() {
   }
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900/95 via-purple-900/90 to-black/95">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900/98 via-purple-900/95 to-black/98 relative">
       <Header />
       
       {/* Navigation Tabs */}
@@ -119,8 +119,8 @@ function App() {
         </div>
       </div>
       
-      <main className="container mx-auto px-4 py-8 bg-black/20 backdrop-blur-sm min-h-screen">
-        <div className="animate-fade-in bg-gradient-to-b from-transparent to-black/30 rounded-xl p-6">
+      <main className="container mx-auto px-4 py-8 bg-gradient-to-b from-black/30 via-purple-900/10 to-black/30 backdrop-blur-md min-h-screen relative z-10">
+        <div className="animate-fade-in bg-gradient-to-b from-gray-900/40 via-purple-900/20 to-black/40 backdrop-blur-sm rounded-xl p-6 border border-purple-500/10">
           {renderContent()}
         </div>
       </main>

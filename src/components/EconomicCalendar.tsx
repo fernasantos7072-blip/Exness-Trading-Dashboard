@@ -117,7 +117,7 @@ export const EconomicCalendar = () => {
   }
   
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 min-h-screen bg-gradient-to-b from-transparent via-purple-900/10 to-black/20 p-6 rounded-xl">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <Calendar className="w-6 h-6 text-primary" />

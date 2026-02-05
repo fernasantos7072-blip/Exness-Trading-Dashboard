@@ -76,8 +76,20 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 200%;
     background: linear-gradient(135deg, #111827 0%, #581c87 50%, #000000 100%);
+    z-index: -2;
+    pointer-events: none;
+  }
+  
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.8) 100%);
     z-index: -1;
     pointer-events: none;
   }
@@ -85,15 +97,16 @@
   /* Fix COMPLETO para evitar tela roxa/cinza no scroll */
   #root {
     min-height: 100vh;
-    background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(88, 28, 135, 0.95) 50%, rgba(0, 0, 0, 0.95) 100%);
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.98) 0%, rgba(88, 28, 135, 0.95) 50%, rgba(0, 0, 0, 0.98) 100%);
     background-attachment: fixed;
     position: relative;
+    z-index: 0;
   }
   
   main {
     min-height: calc(100vh - 100px);
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(8px);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(88, 28, 135, 0.1) 50%, rgba(0, 0, 0, 0.3) 100%);
+    backdrop-filter: blur(12px);
     position: relative;
     z-index: 1;
   }
